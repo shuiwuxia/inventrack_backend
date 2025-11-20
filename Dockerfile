@@ -21,4 +21,4 @@ EXPOSE 8000
 #
 # CRITICAL: 'sql_app' is the Python module (your file name minus .py),
 # and 'app' is the FastAPI instance name (e.g., app = FastAPI()) inside that file.
-CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "sql_app:app"]
+CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "inventrack.main:app"]
