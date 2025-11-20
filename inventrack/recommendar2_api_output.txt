@@ -1,0 +1,66 @@
+{
+  "high": [
+    {
+      "product": "P0001",
+      "category": "Performance",
+      "sales": "Critical"
+    },
+    {
+      "product": "P0002",
+      "category": "Performance",
+      "sales": "Critical"
+    },
+    {
+      "product": "P0003",
+      "category": "Performance",
+      "sales": "Critical"
+    },
+    {
+      "product": "P0004",
+      "category": "Performance",
+      "sales": "Critical"
+    },
+    {
+      "product": "P0005",
+      "category": "Performance",
+      "sales": "Critical"
+    },
+    {
+      "product": "P0006",
+      "category": "Performance",
+      "sales": "High"
+    },
+    {
+      "product": "P0007",
+      "category": "Performance",
+      "sales": "Critical"
+    },
+    {
+      "product": "P0012",
+      "category": "Performance",
+      "sales": "Medium"
+    }
+  ],
+  "low": [
+    {
+      "product": "P0001",
+      "reason": "Restock (High Priority) - Scaled Inventory (0.56) is low."
+    },
+    {
+      "product": "P0002",
+      "reason": "Restock (High Priority) - Scaled Inventory (0.45) is low."
+    },
+    {
+      "product": "P0003",
+      "reason": "Restock (High Priority) - Scaled Inventory (0.11) is low."
+    },
+    {
+      "product": "P0004",
+      "reason": "Restock (High Priority) - Scaled Inventory (0.24) is low."
+    },
+    {
+      "product": "P0007",
+      "reason": "Restock (Urgent Priority) - Scaled Inventory (0.02) is low."
+    }
+  ]
+}

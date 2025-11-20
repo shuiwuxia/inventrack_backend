@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, Text, ForeignKey, TIMESTAMP, DECIMAL, Date
 from sqlalchemy.ext.declarative import declarative_base 
-from .database import Base 
+from inventrack.database import Base 
 class User(Base):
     __tablename__ = "users"
     id = Column("user_id", Integer, primary_key=True, index=True) 
@@ -14,11 +14,21 @@ class Product(Base):
     __tablename__ = "products"
     id = Column("Product_ID", String(50), primary_key=True, index=True)
     product_name = Column("Product_Name", String(150), nullable=False)
-    category = Column("Category", String(100), nullable=False)
+    category = Column("category", String(100), nullable=False)
+    subcategory = Column("subcategory", String(100), nullable=False)
     description = Column("Description", Text)
     mrp = Column("MRP", DECIMAL(10, 2))
     msp = Column("MSP", DECIMAL(10, 2))
     unit_of_measure = Column("Unit_Of_Measure", String(20))
+class Consumer(Base):
+    __tablename__ = "consumers"
+    consumer_id = Column("consumer_id", Integer, primary_key=True, index=True)
+    full_name = Column("full_name", String(255), nullable=False)
+    email_id = Column("email_id", String(255), unique=True, nullable=False)
+    phone_number = Column("phone_number", String(20))
+    address = Column("address", Text)
+    password_hash = Column("password_hash", String(255), nullable=False)
+    
 
 class Shop(Base):
     __tablename__ = "shops"

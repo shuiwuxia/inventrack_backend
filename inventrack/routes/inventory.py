@@ -1,8 +1,10 @@
+# File: inventrack/routes/inventory.py
+
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from sqlalchemy.orm import Session
 from typing import Annotated, List, Any 
-from .. import models, schemas
-from ..dependencies import get_db 
+from inventrack import models, schemas
+from inventrack.dependencies import get_db 
 import uuid
 
 # Imports for CSV processing
@@ -37,11 +39,12 @@ def get_products_by_shop(store_id: str, db: DBDependency):
     for product, stock in products_with_stock:
         results.append({
             "id": product.id,
-            "product_name": product.product_name,
+            "name": product.product_name, # Mapped to "name" for Flutter
             "category": product.category,
-            "mrp": product.mrp,
-            "msp": product.msp,
-            "stock_quantity": stock
+            "subcategory": product.subcategory,
+            "mrp": float(product.mrp),    # FIX: Convert Decimal to float to prevent 500 Error
+            "msp": float(product.msp),    # FIX: Convert Decimal to float to prevent 500 Error
+            "qty": stock                  # Mapped to "qty" for Flutter
         })
 
     return results
@@ -76,6 +79,8 @@ def update_product_details(
         product.product_name = request.product_name
     if request.category is not None:
         product.category = request.category
+    if request.subcategory is not None:
+        product.subcategory = request.subcategory
     if request.mrp is not None:
         product.mrp = request.mrp
     if request.msp is not None:
@@ -156,6 +161,8 @@ async def upload_inventory_csv(store_id: str, db: DBDependency, file: UploadFile
             try:
                 # Get the rest of the details from the CSV
                 category = row['category'].strip()
+                # Note: Product model uses 'subcategory'
+                subcategory = row['subcategory'].strip() 
                 mrp = float(row['mrp'])
                 msp = float(row['msp'])
             except (ValueError, KeyError, TypeError):
@@ -168,6 +175,7 @@ async def upload_inventory_csv(store_id: str, db: DBDependency, file: UploadFile
                 id=new_product_id,
                 product_name=product_name,
                 category=category,
+                subcategory=subcategory,
                 mrp=mrp,
                 msp=msp
             )

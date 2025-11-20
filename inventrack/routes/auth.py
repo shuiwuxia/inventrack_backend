@@ -4,8 +4,8 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import Annotated, Dict, Any # Added Dict, Any for the shopkeeper response
 import uuid 
-from .. import schemas, models
-from ..dependencies import get_db 
+from inventrack import schemas, models
+from inventrack.dependencies import get_db 
 
 router = APIRouter(
     prefix="/auth",
