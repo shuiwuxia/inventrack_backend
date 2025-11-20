@@ -5,7 +5,7 @@ FROM python:3.11-slim
 ENV PYTHONUNBUFFERED 1
 ENV FASTAPI_PORT 8000
 WORKDIR /app
-COPY requirements.txt.
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 4. CODE: Copy the rest of the source code into the container
