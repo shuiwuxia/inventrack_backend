@@ -12,7 +12,6 @@ if db_url_raw is None:
         "DATABASE_URL not found in environment variables or .env file. "
         "Please check your .env file and ensure it's in the correct directory."
     )
-DATABASE_URL = db_url_raw.replace("mysql+mysqlconnector", "mysql+pymysql")
 connect_args = {}
 if ssl_connect_args_json:
     try:
