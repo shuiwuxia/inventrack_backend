@@ -21,12 +21,7 @@ if db_url_raw is None:
     
 # --- FINAL FIX: TRANSFORM THE DIALECT TO USE PYMYSQL ---
 DATABASE_URL = db_url_raw
-if DATABASE_URL.startswith('mysql'):
-    # This replaces 'mysql:' (from TiDB ENV) or 'mysql+mysqlconnector' (from local dev)
-    # with the correct installed driver: 'mysql+pymysql'
-    # The '1' limits the replacement to the first occurrence
-    DATABASE_URL = DATABASE_URL.replace('mysql:', 'mysql+pymysql:', 1).replace('mysql+mysqlconnector', 'mysql+pymysql')
-    
+
 # --- SSL CONNECTION LOGIC (CRUCIAL FOR TiDB) ---
 connect_args = {}
 if ssl_connect_args_json:
