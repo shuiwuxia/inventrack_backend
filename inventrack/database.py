@@ -3,15 +3,22 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 import os
+import json
 load_dotenv()
 db_url_raw = os.getenv("DATABASE_URL")
-
+ssl_connect_args_json = os.getenv("SQLALCHEMY_CONNECT_ARGS")
 if db_url_raw is None:
     raise EnvironmentError(
         "DATABASE_URL not found in environment variables or .env file. "
         "Please check your .env file and ensure it's in the correct directory."
     )
 DATABASE_URL = db_url_raw.replace("mysql+mysqlconnector", "mysql+pymysql")
+connect_args = {}
+if ssl_connect_args_json:
+    try:
+        connect_args = json.loads(ssl_connect_args_json) 
+    except json.JSONDecodeError as e:
+        raise EnvironmentError(f"SQLALCHEMY_CONNECT_ARGS is invalid JSON: {e}")
 engine = create_engine(
     DATABASE_URL, 
     pool_pre_ping=True, 
