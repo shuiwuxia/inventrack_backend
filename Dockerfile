@@ -21,5 +21,5 @@ EXPOSE 8000
 #
 # CRITICAL: 'sql_app' is the Python module (your file name minus .py),
 # and 'app' is the FastAPI instance name (e.g., app = FastAPI()) inside that file.
-CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "inventrack.main:app"]
+CMD ["uvicorn", "inventrack:app", "--host", "0.0.0.0", "--port", "8000"]
 COPY tidb_ca_cert.pem .
