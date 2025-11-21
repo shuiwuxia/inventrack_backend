@@ -43,6 +43,7 @@ class ShopkeeperCreate(BaseModel):
     shop_name: str
     business_verification_id: Optional[str] = None
     address: str      # Maps to Address_Line1
+    city: Optional[str] = None
     shop_phone: Optional[str] = None
     store_type: Optional[str] = None
 
